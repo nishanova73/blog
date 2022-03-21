@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}index))))){% endblock %}
+
+{% block content %}
+    <h1>blog</h1>
+    {% include 'partial/article_list.html' with show_mass_delete=perms.webapp.delete_article %}
+{% endblock %}
