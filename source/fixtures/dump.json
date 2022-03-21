@@ -1,0 +1,56 @@
+[
+{
+    "model": "webapp.article",
+    "pk": 1,
+    "fields": {
+        "title": "agdjfgv,bsdguvhbsdhjgvghyagilsydhvoiauioerd",
+        "text": "mdjfgvuytcatwYJEhfoicytiEgfhuW&egdfgw86c5tuywjehpiutw8etyhyf7tgj",
+        "author": 1,
+        "status": "rejected",
+        "created_at": "2022-03-21T07:42:18.355Z",
+        "updated_at": "2022-03-21T07:42:18.355Z",
+        "like_count": 0,
+        "tags": []
+    }
+},
+{
+    "model": "webapp.tag",
+    "pk": 1,
+    "fields": {
+        "name": "cool",
+        "created_at": "2022-03-21T07:42:47.947Z"
+    }
+},
+{
+    "model": "webapp.tag",
+    "pk": 2,
+    "fields": {
+        "name": "bee",
+        "created_at": "2022-03-21T07:42:53.373Z"
+    }
+},
+{
+    "model": "webapp.tag",
+    "pk": 3,
+    "fields": {
+        "name": "sdcmsd",
+        "created_at": "2022-03-21T07:42:56.686Z"
+    }
+},
+{
+    "model": "webapp.tag",
+    "pk": 4,
+    "fields": {
+        "name": "dskjchggad",
+        "created_at": "2022-03-21T07:42:58.967Z"
+    }
+},
+{
+    "model": "webapp.articlelike",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "article": 1
+    }
+}
+]
