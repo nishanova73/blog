@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block nav %}
+    {% if request.user == user_obj %}
+        <li><a href="{% url 'accounts:change' user_obj.pk %}">Update</a></li>
+        <li><a href="{% url 'accounts:password_change' %}">Resetting password</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>User account: {{ user_object.username }}</h1>
+    <p><strong>Date of birth: </strong>{{ user_object.profile.birth_date|date:'d.m.Y'|default:"Not specified" }}</p>
+    <p><strong>Name: </strong>{{ user_object.user|default:"Not specified" }}</p>
+
+    {% if user_object.profile.avatar %}
+        <img src="{{ user_object.profile.avatar.url }}" alt="user avatar">
+    {% endif %}
+
+   <h2 class="text-center clear">Author articles:</h2>
+    {% include 'partial/article_list.html' %}
+{% endblock %}
+
+{% endblock content %}
