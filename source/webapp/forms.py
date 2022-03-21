@@ -1,0 +1,54 @@
+from django import forms
+from django.core.exceptions import ValidationError
+from django.core.validators import BaseValidator
+from django.utils.deconstruct import deconstructible
+
+from .models import STATUS_CHOICES, Article, Comment
+
+default_status = STATUS_CHOICES[0][0]
+BROWSER_DATETIME_FORMAT = '%d.%m.%Y %H:%M'
+
+def at_least_10(string):
+    if len(string) < 10:
+        raise ValidationError('This value is too short!')
+
+
+@deconstructible
+class MinLengthValidator(BaseValidator):
+    message = 'Value "%(value)s" has length of %(show_value)d! It should be at least %(limit_value)d symbols long!'
+    code = 'too_short'
+
+    def compare(self, value, limit):
+        return value < limit
+
+    def clean(self, value):
+        return len(value)
+
+
+class ArticleForm(forms.ModelForm):
+
+    class Meta:
+        model = Article
+        fields = ['title', 'text', 'status', 'tags']
+        widgets = {'tags': forms.CheckboxSelectMultiple}
+
+    def clean(self):
+        cleaned_data = super().clean()
+        errors = []
+        text = cleaned_data.get('text')
+        title = cleaned_data.get('title')
+        if text and title and text == title:
+            errors.append(ValidationError("Text of the article shouldn't duplicate it's title!"))
+        if errors:
+            raise ValidationError(errors)
+        return cleaned_data
+
+
+class SimpleSearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label="Find")
+
+
+class ArticleCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
